@@ -1,0 +1,15 @@
+services:
+  valheim:
+    image: lloesche/valheim-server:latest
+    restart: unless-stopped
+    ports:
+      - "2456-2458:2456-2458/udp"
+    env_file:
+      - .env
+    volumes:
+      - ./config:/config
+      - valheim-data:/opt/valheim
+    stop_grace_period: 2m
+
+volumes:
+  valheim-data:
