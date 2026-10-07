@@ -27,10 +27,10 @@ Edit `.env` (gitignored) before starting. See `.env.example` for all variables. 
 ## Adding BepInEx mods
 
 1. Set `BEPINEX=true` in `.env`
-2. Copy mod folders into the `valheim-config` Docker volume at `bepinex/plugins/`
+2. Copy mod folders into `./config/bepinex/plugins/`
 3. `make restart`
 
 ## Volumes
 
-- `valheim-config` — world saves, admin/permit lists, BepInEx config
-- `valheim-data` — cached server binary (persists across updates)
+- `./config` (bind mount, gitignored) — world saves, admin/permit lists, BepInEx config
+- `valheim-data` (named volume) — cached server binary (persists across updates)
