@@ -41,6 +41,7 @@ All settings live in `.env`, which is gitignored:
 | `SERVER_PASS`   | `changeme`          | Join password (must be at least 5 characters)                |
 | `SERVER_PUBLIC` | `false`             | `true` lists the server in the public server browser         |
 | `BEPINEX`       | `false`             | `true` enables BepInEx mod support                           |
+| `SERVER_ARGS`   | `-crossplay`        | Extra server flags; `-crossplay` lets PS5/Xbox players join  |
 
 The image supports many more options (backups, update schedules, admin lists, and so on). See the [image documentation](https://github.com/lloesche/valheim-server-docker#environment-variables) for the full list, and add any of them to `.env`.
 
@@ -59,6 +60,16 @@ The image supports many more options (backups, update schedules, admin lists, an
 The server uses UDP ports **2456–2458**. On the same network, connect in-game with **Join IP** using `<host-ip>:2456`.
 
 For friends outside your network, forward UDP ports 2456–2458 on your router to the host machine, then have them connect to `<your-public-ip>:2456`.
+
+### Crossplay (PS5 / Xbox)
+
+Console players can only join when `SERVER_ARGS=-crossplay` is set (the default in `.env.example`). Crossplay servers are reached by a join code, not an IP address, and need no port forwarding. Find the code in the logs:
+
+```sh
+docker compose logs | grep -i "join code"
+```
+
+In-game, choose **Join Game → Add Server**, enter the code and the server password. The join code changes on every restart. Most BepInEx mods don't work with crossplay.
 
 ## Data and backups
 
